@@ -32,6 +32,16 @@ public class Book implements ActionListener {
         records = new ArrayList<>();
         currentRecordIndex = 0;
 
+        nameLabel = new Label("Name:");
+        addressLabel = new Label("Address:");
+        phoneLabel = new Label("Phone Number:");
+        emailLabel = new Label("Email:");
+
+        textField1 = new TextField(20);
+        textField2 = new TextField(20);
+        textField3 = new TextField(20);
+        textField4 = new TextField(20);
+
         buttonSave = new Button("Save");
         buttonSave.addActionListener(this);
 
@@ -56,96 +66,44 @@ public class Book implements ActionListener {
         buttonExit = new Button("Exit");
         buttonExit.addActionListener(this);
 
-        nameLabel = new Label("Name:");
-        addressLabel = new Label("Address:");
-        phoneLabel = new Label("Phone Number:");
-        emailLabel = new Label("Email:");
-
-        textField1 = new TextField(20);
-        textField2 = new TextField(20);
-        textField3 = new TextField(20);
-        textField4 = new TextField(20);
-
         gridBagLayout = new GridBagLayout();
         panel.setLayout(gridBagLayout);
-
         gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.anchor = GridBagConstraints.EAST;
+
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(2, 2, 2, 2);
-
         panel.add(nameLabel, gbc);
 
-        gbc.gridy = 1;
+        gbc.gridx = 1;
+        panel.add(textField1, gbc);
+
+        gbc.gridy++;
+        gbc.gridx = 0;
         panel.add(addressLabel, gbc);
 
-        gbc.gridy = 2;
+        gbc.gridx = 1;
+        panel.add(textField2, gbc);
+
+        gbc.gridy++;
+        gbc.gridx = 0;
         panel.add(phoneLabel, gbc);
 
-        gbc.gridy = 3;
+        gbc.gridx = 1;
+        panel.add(textField3, gbc);
+
+        gbc.gridy++;
+        gbc.gridx = 0;
         panel.add(emailLabel, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-
-        panel.add(textField1, gbc);
-
-        gbc.gridy = 1;
-        panel.add(textField2, gbc);
-
-        gbc.gridy = 2;
-        panel.add(textField3, gbc);
-
-        gbc.gridy = 3;
         panel.add(textField4, gbc);
 
+        gbc.gridy++;
         gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth =2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(2, 2, 2, 2);
-
-        panel.add(buttonSave, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        gbc.insets = new Insets(2, 2, 2, 2);
-
-        panel.add(buttonDelete, gbc);
-
-        gbc.gridx = 2;
-        panel.add(buttonUpdate, gbc);
-
-        gbc.gridx = 2;
-        gbc.gridy = 5;
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(5, 5, 5, 5);
-
-        panel.add(buttonLeft, gbc);
-
-        gbc.gridx = 1;
-        panel.add(buttonSearch, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.gridwidth = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(5, 5, 5, 5);
-
-        panel.add(buttonRight, gbc);
-
-        gbc.gridx = 1;
-        panel.add(buttonClear, gbc);
-
-        gbc.gridx = 2;
-        gbc.gridwidth = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(2, 0, 2, 2);
-
-        panel.add(buttonExit, gbc);
+        gbc.gridwidth = 3;
+        panel.add(createButtonPanel(), gbc);
 
         frame.add(panel);
         frame.pack();
@@ -157,7 +115,25 @@ public class Book implements ActionListener {
             }
         });
 
-        displayRecord(); // Display the first record initially
+        displayRecord();
+    }
+
+    private Panel createButtonPanel() {
+        Panel buttonPanel = new Panel();
+        buttonPanel.setLayout(new GridLayout(3, 3, 5, 5));
+
+        buttonPanel.add(buttonSave);
+        buttonPanel.add(buttonDelete);
+        buttonPanel.add(buttonUpdate);
+
+        buttonPanel.add(buttonLeft);
+        buttonPanel.add(buttonSearch);
+        buttonPanel.add(buttonRight);
+
+        buttonPanel.add(buttonClear);
+        buttonPanel.add(buttonExit);
+
+        return buttonPanel;
     }
 
     private void displayRecord() {
@@ -196,7 +172,7 @@ public class Book implements ActionListener {
                 if (currentRecordIndex >= records.size()) {
                     currentRecordIndex--;
                 }
-                displayRecord(); // Display next record
+                displayRecord();
             }
         } else if (e.getSource() == buttonUpdate) {
             // Update button logic
@@ -212,28 +188,28 @@ public class Book implements ActionListener {
                 displayRecord();
             }
         } else if (e.getSource() == buttonLeft) {
-            // Left button logic
+            // Left button search
             if (currentRecordIndex > 0) {
                 currentRecordIndex--;
                 displayRecord();
             }
         } else if (e.getSource() == buttonSearch) {
-            // Search button logic
+            // Search button
         } else if (e.getSource() == buttonRight) {
-            // Right button logic
+            // Right button search
             if (currentRecordIndex < records.size() - 1) {
                 currentRecordIndex++;
                 displayRecord();
             }
         } else if (e.getSource() == buttonClear) {
-            // Clear all fields
+            // Clear all fields button
             textField1.setText("");
             textField2.setText("");
             textField3.setText("");
             textField4.setText("");
             System.out.println("Cleared all fields.");
         } else if (e.getSource() == buttonExit) {
-            // Exit the application
+            // Exit the application button
             System.exit(0);
         }
     }
