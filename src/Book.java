@@ -19,19 +19,19 @@ public class Book implements ActionListener {
 
     Frame frame;
 
-    List<String> records; // Store records
-    int currentRecordIndex; // Track current record index
+    List<String> records;
+    // Track current record index
+    int currentRecordIndex;
 
     Book() {
         frame = new Frame("Book");
         frame.setLayout(new FlowLayout());
         panel = new Panel();
 
-        // Initialize records list and current record index
+
         records = new ArrayList<>();
         currentRecordIndex = 0;
 
-        // Initialize buttons and text fields
         buttonSave = new Button("Save");
         buttonSave.addActionListener(this);
 
@@ -72,8 +72,8 @@ public class Book implements ActionListener {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(2, 2, 2, 2);
 
         panel.add(nameLabel, gbc);
 
@@ -88,7 +88,7 @@ public class Book implements ActionListener {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.anchor = GridBagConstraints.CENTER;
 
         panel.add(textField1, gbc);
 
@@ -103,15 +103,15 @@ public class Book implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 4;
-        gbc.gridwidth = 2;
+        gbc.gridwidth =2;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(2, 2, 2, 2);
 
         panel.add(buttonSave, gbc);
 
         gbc.gridx = 1;
-        gbc.gridwidth = 1;
-        gbc.insets = new Insets(10, 5, 5, 10); // Adjusted gap between Delete and Update
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(2, 2, 2, 2);
 
         panel.add(buttonDelete, gbc);
 
@@ -122,7 +122,7 @@ public class Book implements ActionListener {
         gbc.gridy = 5;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 5, 5, 5);
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         panel.add(buttonLeft, gbc);
 
@@ -131,9 +131,9 @@ public class Book implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 6;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 0;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 5, 5, 5);
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         panel.add(buttonRight, gbc);
 
@@ -141,9 +141,9 @@ public class Book implements ActionListener {
         panel.add(buttonClear, gbc);
 
         gbc.gridx = 2;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 0;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 5, 5, 10); // Adjusted gap between Clear and Exit
+        gbc.insets = new Insets(2, 0, 2, 2);
 
         panel.add(buttonExit, gbc);
 
@@ -191,10 +191,10 @@ public class Book implements ActionListener {
         } else if (e.getSource() == buttonDelete) {
             // Delete the current record
             if (!records.isEmpty() && currentRecordIndex >= 0 && currentRecordIndex < records.size()) {
-                records.remove(currentRecordIndex); // Remove current record
+                records.remove(currentRecordIndex);
                 System.out.println("Record deleted.");
                 if (currentRecordIndex >= records.size()) {
-                    currentRecordIndex--; // Adjust index if at the end
+                    currentRecordIndex--;
                 }
                 displayRecord(); // Display next record
             }
